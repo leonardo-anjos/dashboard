@@ -48,9 +48,11 @@ export class RankingApi extends Component {
           <h1 style={{ backgroundColor: "#0C1A2D", color: "#ffff", fontWeight: "bold" }}>Ranking por API</h1>
           <Col span={12}>
             <Select defaultValue="select1" style={{ width: "100%" }} onChange={this.handleChange}>
-              <Option value="select1">Select1</Option>
-              <Option value="select2">Select2</Option>
-              <Option value="select3">Select3</Option>
+              <Option value="select1">SERPRO</Option>
+              <Option value="select2">Correios</Option>
+              <Option value="select4">CAIXA</Option>
+              <Option value="select5">SENASP</Option>
+              <Option value="select6">Uber</Option>
             </Select>
           </Col>
           <Col span={12}>

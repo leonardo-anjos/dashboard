@@ -3,8 +3,8 @@ import { Chart } from 'react-google-charts';
 
 const dataSource = [
   [
-    'Element',
-    'Density',
+    'Orgao',
+    'Total',
     { role: 'style' },
     {
       sourceColumn: 0,
@@ -31,7 +31,7 @@ export class GraficoBarra1 extends Component {
           title: 'Média de Requisições',
           width: 600,
           height: 400,
-          bar: { groupWidth: '95%' },
+          bar: { groupWidth: '70%' },
           legend: { position: 'none' },
         }}
       />

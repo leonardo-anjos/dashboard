@@ -21,7 +21,7 @@ export class FilterSelect extends Component {
     return(
       <div className="filter">
         <Select style={{width: '100px'}} size={size} placeholder="Ano">{ano}</Select>
-        <Select style={{width: '100px'}} placeholder="Mês">
+        <Select style={{width: '150px'}} placeholder="Mês">
           <Option value="jan">Janeiro</Option>
           <Option value="fev">Fevereiro</Option>
           <Option value="mar">Março</Option>

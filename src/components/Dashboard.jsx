@@ -58,7 +58,7 @@ export class Dashboard extends Component {
               </Row>
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center', color: '#fffff'}}>
+          <Footer style={{ textAlign: 'center'}}>
             Serviço Federal de Processamento de Dados - SERPRO
           </Footer>
         </Layout>

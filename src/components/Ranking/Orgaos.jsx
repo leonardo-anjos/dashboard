@@ -11,9 +11,10 @@ export class RankingOrgaos extends Component {
           <h1 style={{ backgroundColor: "#0C1A2D", color: "#ffff", fontWeight:"bold" }}>Ranking por Órgão</h1>
           <Col span={12}>
             <Select defaultValue="select1" style={{ width: "100%" }} onChange={this.handleChange}>
-              <Option value="select1">Select1</Option>
-              <Option value="select2">Select2</Option>
-              <Option value="select3">Select3</Option>
+              <Option value="select1">Min. Fazenda</Option>
+              <Option value="select2">Casa da Moeda</Option>
+              <Option value="select3">Min. da Economia</Option>
+              <Option value="select4 ">Min. do Planejamento</Option>
             </Select>
           </Col>
           <Col span={12}>
