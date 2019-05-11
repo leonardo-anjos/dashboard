@@ -13,10 +13,11 @@ const dataSource = [
       calc: 'stringify',
     },
   ],
-  ['Copper', 8.94, '#b87333', null],
-  ['Silver', 10.49, 'silver', null],
-  ['Gold', 19.3, 'gold', null],
-  ['Platinum', 21.45, 'color: #e5e4e2', null],
+  ['SERPRO', 24, '#F25764', null],
+  ['Min. Planejamento', 76, '#D8DCD8', null],
+  ['MEC', 64, '#409EEC', null],
+  ['DATAPREV', 52, '#54BF64', null],
+  ['Uber', 9, '#F29727', null] 
 ]
 
 export class GraficoBarra1 extends Component {
@@ -27,14 +28,12 @@ export class GraficoBarra1 extends Component {
         loader={<div>Loading Chart</div>}
         data={dataSource}
         options={{
-          title: 'Density of Precious Metals, in g/cm^3',
+          title: 'Média de Requisições',
           width: 600,
           height: 400,
           bar: { groupWidth: '95%' },
           legend: { position: 'none' },
         }}
-        // For tests
-        rootProps={{ 'data-testid': '6' }}
       />
     );
   }

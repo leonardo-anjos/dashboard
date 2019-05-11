@@ -4,8 +4,8 @@ import { Card } from 'antd';
 export class SideOrgaosConsumidores extends Component {
   render() {
     return(
-      <Card>
-        <p>SideOrgaosConsumidores</p>
+      <Card style={{ marginTop: 16 }}>
+        <p>OrgaosConsumidores</p>
       </Card>
     );
   }

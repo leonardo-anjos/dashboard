@@ -8,6 +8,7 @@ import { RankingOrgaos } from './Ranking/Orgaos';
 import { RankingApi } from './Ranking/Api';
 import { GraficoBarra1 } from './Grafico/Barra1';
 import { GraficoBarra2 } from './Grafico/Barra2';
+import { FilterSelect } from './Filter/Select';
 import './Dashboard.css';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -18,7 +19,7 @@ export class Dashboard extends Component {
       <Layout className="dashboard">
         <Sider style={{overflow: 'auto', height: '100vh', position: 'fixed', left: 0}}>
           <div id="logo">
-            <p>CONECTA GOV</p>
+            <p>CONECTA <b style={{ color: '#409EEC'}}>GOV</b></p>
           </div>
           <div className="details_side">
             <SideTotalAcessos />
@@ -28,14 +29,16 @@ export class Dashboard extends Component {
           </div>
         </Sider>
         <Layout style={{ marginLeft: 200 }}>
-          <Header style={{ background: '#fff', padding: 0 }} />
+          <Header style={{ background: '#fff'}}>
+            <FilterSelect/>
+          </Header>
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
             <div style={{ padding: 24, background: '#fff', textAlign: 'center' }}>
               <Row gutter={24}> 
-                <Col span={8}>
+                <Col span={12}>
                   <RankingOrgaos/>
                 </Col>
-                <Col span={16}>
+                <Col span={12}>
                   <RankingApi/>
                 </Col>
               </Row>
@@ -48,13 +51,15 @@ export class Dashboard extends Component {
                   <GraficoBarra1/>
                 </Col>
                 <Col span={12}>
-                  <GraficoBarra2/>
+                  <div style={{ paddingTop: 50 }}>
+                    <GraficoBarra2/>
+                  </div>
                 </Col>
               </Row>
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            footer
+          <Footer style={{ textAlign: 'center', color: '#fffff'}}>
+            Serviço Federal de Processamento de Dados - SERPRO
           </Footer>
         </Layout>
       </Layout>

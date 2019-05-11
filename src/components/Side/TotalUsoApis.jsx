@@ -4,8 +4,8 @@ import { Card } from 'antd';
 export class SideTotalUsoApis extends Component {
   render() {
     return(
-      <Card>
-        <p>SideTotalUsoApis</p>
+      <Card style={{ marginTop: 16 }}>
+        <p>TotalUsoApis</p>
       </Card>
     );
   }

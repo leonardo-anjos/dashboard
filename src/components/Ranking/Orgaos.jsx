@@ -8,7 +8,7 @@ export class RankingOrgaos extends Component {
     return(
       <React.Fragment>
         <Row gutter={16}>
-          <h1 style={{ backgroundColor: "#0C1A2D", color: "#ffff"}}>Ranking por órgão</h1>
+          <h1 style={{ backgroundColor: "#0C1A2D", color: "#ffff", fontWeight:"bold" }}>Ranking por Órgão</h1>
           <Col span={12}>
             <Select defaultValue="select1" style={{ width: "100%" }} onChange={this.handleChange}>
               <Option value="select1">Select1</Option>
