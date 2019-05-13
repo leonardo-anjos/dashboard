@@ -5,8 +5,8 @@ export class SideOrgaosConsumidores extends Component {
   render() {
     return(
       <Card style={{ marginTop: 10 }}>
-        <p>Órgãos Consumidores de Dados</p>
-        <Icon type="logout"/>
+        <p style={{ textAlign: 'center', fontWeight: 'bold'}}>Órgãos Consumidores de Dados</p>
+        <Icon type="logout" style={{ fontSize: '30px', color: '#08c'}} theme="outlined"/>
       </Card>
     );
   }

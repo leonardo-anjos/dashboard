@@ -5,7 +5,7 @@ import './Select.css';
 const Option = Select.Option;
 
 const ano = [];
-for (let i = 1990; i < 2019; i++) {
+for (let i = 1990; i <= 2019; i++) {
   ano.push(<Option key={i}>{i}</Option>);
 }
 
@@ -58,7 +58,7 @@ export class FilterSelect extends Component {
         </Select>
         <Select
           showSearch
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           placeholder="Órgão Fornecedor"
           optionFilterProp="children"
           filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
