@@ -4,13 +4,15 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
 // import { loginReducer, loginWatcher } from '../../components/Login/Redux';
+import { getAllReducer, getAllWatcher  } from "../../components/Grafico/Redux";
 
 // reducers
 const reducers = combineReducers({
   
   // auth reducers
-  // login: loginReducer,
-  // user: userReducer,
+  // login: loginReducer
+  
+  alldata: getAllReducer
 
 });
 
@@ -25,13 +27,13 @@ export const store = createStore(
 
 // run the saga
 // sagaMiddleware.run(loginWatcher);
+sagaMiddleware.run(getAllWatcher);
 
 // creating provider
 const ProviderRedux = ({ children }) =>
   <Provider store={store}>
     { children }
   </Provider>;
-
 
 // exposing provider
 export { ProviderRedux };
