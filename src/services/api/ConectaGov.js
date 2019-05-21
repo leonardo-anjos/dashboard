@@ -1,9 +1,9 @@
-import { api } from ".";
+import { index } from '.';
 
 export const ServiceApiConectaGov = {
 
   getAll: () => {
-    return api.get('/_search');
+    return index.get('/sipes/_search');
   }
 
 };
