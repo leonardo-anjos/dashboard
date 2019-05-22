@@ -51,9 +51,7 @@ export class Dashboard extends Component {
                   <GraficoBarra1/>
                 </Col>
                 <Col span={12}>
-                  <div style={{ paddingTop: 50 }}>
-                    <GraficoBarra2/>
-                  </div>
+                  <GraficoBarra2/>
                 </Col>
               </Row>
             </div>

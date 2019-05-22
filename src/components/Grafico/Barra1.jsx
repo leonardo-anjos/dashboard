@@ -1,58 +1,97 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAll } from './Redux'
+import { getSomaTotalBensEmUso } from './Redux'
+import { Chart, Geom, Axis, Tooltip } from "bizcharts";
 
-// import { Chart } from 'react-google-charts';
+const data = [
+  {
+    year: "1991",
+    value: 3
+  },
+  {
+    year: "1992",
+    value: 4
+  },
+  {
+    year: "1993",
+    value: 3.5
+  },
+  {
+    year: "1994",
+    value: 5
+  },
+  {
+    year: "1995",
+    value: 4.9
+  },
+  {
+    year: "1996",
+    value: 6
+  },
+  {
+    year: "1997",
+    value: 7
+  },
+  {
+    year: "1998",
+    value: 9
+  },
+  {
+    year: "1999",
+    value: 13
+  }
+];
 
-// const dataSource = [
-//   [
-//     'Orgao',
-//     'Total',
-//     { role: 'style' },
-//     {
-//       sourceColumn: 0,
-//       role: 'annotation',
-//       type: 'string',
-//       calc: 'stringify',
-//     },
-//   ],
-//   ['SERPRO', 24, '#F25764', null],
-//   ['Min. Planejamento', 76, '#D8DCD8', null],
-//   ['MEC', 64, '#409EEC', null],
-//   ['DATAPREV', 52, '#54BF64', null],
-//   ['Uber', 9, '#F29727', null] 
-// ]
+const cols = {
+  value: {
+    min: 0
+  },
+  year: {
+    range: [0, 1]
+  }
+};
 
 export const GraficoBarra1 =
 
 connect(
-  ({ alldata }) => ({ alldata }),
-  { getAll }
+  ({ graficosBarra }) => ({ graficosBarra }),
+  { getSomaTotalBensEmUso }
 )(
   class extends Component {
 
     render() {
-      
+      const { data: graficosBarra } = this.props.graficosBarra;
+      console.log(graficosBarra);
+    
       return(
-        // <Chart
-        //   chartType="BarChart"
-        //   loader={<div>Loading Chart</div>}
-        //   // data={dataSource}
-        //   options={{
-        //     title: 'Média de Requisições',
-        //     width: 600,
-        //     height: 400,
-        //     bar: { groupWidth: '70%' },
-        //     legend: { position: 'none' },
-        //   }}
-        // />
-        <div>GraficoBarra1</div>
+        <div>
+          <Chart height={400} data={data} scale={cols} forceFit>
+            <Axis name="year" />
+            <Axis name="value" />
+            <Tooltip
+              crosshairs={{
+                type: "y"
+              }}
+            />
+            <Geom type="line" position="year*value" size={2} />
+            <Geom
+              type="point"
+              position="year*value"
+              size={4}
+              shape={"circle"}
+              style={{
+                stroke: "#fff",
+                lineWidth: 1
+              }}
+            />
+          </Chart>
+        </div>
       );
 
     }
 
     componentDidMount() {
-      this.props.getAll();
+      this.props.getSomaTotalBensEmUso();
     }
 
   } // class

@@ -1,34 +1,84 @@
 import React, { Component } from 'react';
-import { Chart } from 'react-google-charts';
+import { connect } from 'react-redux';
+import { getMediaBensEmUso } from "./Redux";
+import { Chart, Geom, Axis, Tooltip } from "bizcharts";
 
-const dataSource = [
-  ['Mes/Ano', 'Valores'],
-  ['Out/18', 308],
-  ['Nov/18', 364],
-  ['Dez/18', 206],
-  ['Jan/18', 910],
-  ['Fev/18', 791],
-  ['Mar/18', 623],
-  ['Abr/18', 188],
-  ['Mai/19', 423]
-]
-
-export class GraficoBarra2 extends Component {
-  render() {
-    return(
-      <Chart
-        width={'500px'}
-        height={'300px'}
-        chartType="Bar"
-        loader={<div>Loading Chart</div>}
-        data={dataSource}
-        options={{
-          chart: {
-            title: 'Consumo de APIs',
-            subtitle: 'Valores referente a intervelo de 2018-2019',
-          },
-        }}
-      />
-    );
+const data = [
+  {
+    year: "1951 年",
+    sales: 38
+  },
+  {
+    year: "1952 年",
+    sales: 52
+  },
+  {
+    year: "1956 年",
+    sales: 61
+  },
+  {
+    year: "1957 年",
+    sales: 145
+  },
+  {
+    year: "1958 年",
+    sales: 48
+  },
+  {
+    year: "1959 年",
+    sales: 38
+  },
+  {
+    year: "1960 年",
+    sales: 38
+  },
+  {
+    year: "1962 年",
+    sales: 38
   }
-}
+];
+
+const cols = {
+  sales: {
+    tickInterval: 20
+  }
+};
+
+export const GraficoBarra2 =
+
+connect(
+  ({ graficosBarra }) => ({ graficosBarra }),
+  { getMediaBensEmUso }
+)(
+  class extends Component {
+    
+    render() {
+
+      const { data: graficosBarra } = this.props.graficosBarra;
+      console.log(graficosBarra);
+      
+      return(
+        <div>
+          <Chart height={400} data={data} scale={cols} forceFit>
+            <Axis name="year" />
+            <Axis name="sales" />
+            <Tooltip
+              crosshairs={{
+                type: "y"
+              }}
+            />
+            <Geom type="interval" position="year*sales" />
+          </Chart>
+        </div>
+      );
+
+    }
+
+    componentDidMount() {
+      this.props.getMediaBensEmUso(); 
+    }
+
+  } // class
+
+); // redux
+
