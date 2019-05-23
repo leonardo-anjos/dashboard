@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import { Row, Col, Select, Input } from 'antd';
 import { Row, Col, Select, Input, Button } from 'antd';
 import { getSuperintendenciasFla } from './Redux';
 import { Chart, Geom, Axis, Tooltip, Coord, Label } from "bizcharts";
@@ -60,8 +61,8 @@ connect(
 
     render() {
 
-      const { data: superintendenciasFla } = this.props.superintendenciasFla;
-      console.log(superintendenciasFla);
+      // const { data: superintendenciasFla } = this.props.superintendenciasFla;
+      // console.log(superintendenciasFla);
       
       return(
         <React.Fragment>
@@ -85,7 +86,6 @@ connect(
             height={window.innerHeight}
             data={dv}
             scale={cols}
-            padding={[80, 100, 80, 80]}
             forceFit
           >
             <Coord type="theta" radius={0.75} />

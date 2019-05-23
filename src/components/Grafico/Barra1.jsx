@@ -1,99 +1,61 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getSomaTotalBensEmUso } from './Redux'
+// import { connect } from 'react-redux';
+// import { getSomaTotalBensEmUso } from './Redux'
 import { Chart, Geom, Axis, Tooltip } from "bizcharts";
 
-const data = [
-  {
-    year: "1991",
-    value: 3
-  },
-  {
-    year: "1992",
-    value: 4
-  },
-  {
-    year: "1993",
-    value: 3.5
-  },
-  {
-    year: "1994",
-    value: 5
-  },
-  {
-    year: "1995",
-    value: 4.9
-  },
-  {
-    year: "1996",
-    value: 6
-  },
-  {
-    year: "1997",
-    value: 7
-  },
-  {
-    year: "1998",
-    value: 9
-  },
-  {
-    year: "1999",
-    value: 13
-  }
-];
+import { index } from '../../services/api/index';
 
 const cols = {
-  value: {
-    min: 0
-  },
-  year: {
-    range: [0, 1]
+  sales: {
+    tickInterval: 100
   }
 };
 
 export const GraficoBarra1 =
 
-connect(
-  ({ graficosBarra }) => ({ graficosBarra }),
-  { getSomaTotalBensEmUso }
-)(
+// connect(
+//   ({ graficosBarra }) => ({ graficosBarra }),
+//   { getSomaTotalBensEmUso }
+// )(
   class extends Component {
 
+    state = {
+      somaTotalBens: []
+    }
+
     render() {
-      const { data: graficosBarra } = this.props.graficosBarra;
-      console.log(graficosBarra);
-    
+      const { somaTotalBens } = this.state; 
+      // const { data: graficoBarra } = this.props.graficosBarra;
+      console.log(somaTotalBens);
+      
       return(
-        <div>
-          <Chart height={400} data={data} scale={cols} forceFit>
-            <Axis name="year" />
-            <Axis name="value" />
-            <Tooltip
-              crosshairs={{
-                type: "y"
-              }}
-            />
-            <Geom type="line" position="year*value" size={2} />
-            <Geom
-              type="point"
-              position="year*value"
-              size={4}
-              shape={"circle"}
-              style={{
-                stroke: "#fff",
-                lineWidth: 1
-              }}
-            />
-          </Chart>
-        </div>
+        <Chart height={400} data={somaTotalBens} scale={cols} forceFit>
+          <Axis name="0" />
+          <Axis name="1" />
+          <Tooltip
+            crosshairs={{
+              type: "y"
+            }}
+          />
+          <Geom type="interval" position="0*1" />
+        </Chart>
       );
 
     }
 
     componentDidMount() {
-      this.props.getSomaTotalBensEmUso();
+      // this.props.getSomaTotalBensEmUso();
+      this.getSomaTotalBensEmUso();
+    }
+
+    getSomaTotalBensEmUso = async () => {
+      const response = await index.post('_xpack/sql?format=json', {
+        "query": "SELECT Superintendencia, SUM(Valor_Bem) AS Total FROM sipes WHERE Filial = 'FLA' AND Tipo_Classe = 'T' AND Estado = 'Em Uso' GROUP BY Superintendencia" 
+      });
+      // console.log(response.data.rows);
+      this.setState({ somaTotalBens: response.data.rows });
     }
 
   } // class
 
-); // redux
+// ); // redux

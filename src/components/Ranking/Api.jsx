@@ -62,7 +62,6 @@ export class RankingApi extends Component {
 
         <Chart
           style={{ margin: "20px auto 0", padding: "0 20px" }}
-          width={'500px'}
           height={'300px'}
           chartType="TreeMap"
           loader={<div>Loading Chart</div>}
