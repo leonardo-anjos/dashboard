@@ -16,7 +16,7 @@ export const ServiceApiConectaGov = {
   // grafico barra 1
   getSomaTotalBensEmUso: () => {
     return index.post('_xpack/sql?format=json', {
-      "query": "SELECT SUM(Valor_Bem) FROM sipes WHERE Filial = 'FLA' AND Tipo_Classe = 'T' AND Estado = 'Em Uso' GROUP BY Superintendencia" 
+      "query": "SELECT Superintendencia, SUM(Valor_Bem) AS Total FROM sipes WHERE Filial = 'FLA' AND Tipo_Classe = 'T' AND Estado = 'Em Uso' GROUP BY Superintendencia" 
     });
   },
 
