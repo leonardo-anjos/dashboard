@@ -68,16 +68,16 @@ export const GraficoBarra2 =
       return(
         <Chart height={400} data={mediaBens} scale={cols} forceFit>
           <Axis name="0" />
-          <Axis name="1" />
+          <Axis name="2" />
           <Tooltip
             crosshairs={{
               type: "y"
             }}
           />
-          <Geom type="line" position="0*1" size={2} />
+          <Geom type="line" position="0*2" size={2} />
           <Geom
             type="point"
-            position="0*1"
+            position="0*2"
             size={4}
             shape={"circle"}
             style={{
@@ -97,9 +97,19 @@ export const GraficoBarra2 =
 
     getMediaBensEmUso  = async () => {
       const response = await index.post('_xpack/sql?format=json', {
-        "query": "SELECT Superintendencia, AVG(Valor_Bem) AS Total FROM sipes WHERE Filial = 'FLA' AND Tipo_Classe = 'T' AND Estado = 'Em Uso' GROUP BY Superintendencia" 
+        "query": "SELECT cast(MONTH_OF_YEAR(Data_Tombamento) as string) as mes, cast(year(Data_Tombamento) as string) as ano, sum(Valor_Bem) as total FROM sipes WHERE Filial = 'FLA' AND Tipo_Classe = 'T' AND Estado = 'Em Uso' and ano = '2013' group by ano, mes" 
       });
-      // console.log(response.data.rows);
+
+      console.log(response.data.rows);
+
+      // const mesAno = response.data.rows.map(e => {
+      //   // const result = e[0].concat('/').concat(e[1]);
+      //   const newdata = [];
+      //   newdata.push(e[0].concat('/').concat(e[1]));
+      //   const order = newdata.sort();
+      //   console.log(order);
+      // })
+
       this.setState({ mediaBens: response.data.rows });
     }
 

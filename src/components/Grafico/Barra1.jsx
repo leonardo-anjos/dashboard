@@ -26,7 +26,7 @@ export const GraficoBarra1 =
     render() {
       const { somaTotalBens } = this.state; 
       // const { data: graficoBarra } = this.props.graficosBarra;
-      console.log(somaTotalBens);
+      // console.log(somaTotalBens);
       
       return(
         <Chart height={400} data={somaTotalBens} scale={cols} forceFit>
