@@ -4,46 +4,11 @@ import React, { Component } from 'react';
 import { Chart, Geom, Axis, Tooltip } from "bizcharts";
 import { index } from '../../services/api/index';
 
-// const data = [
-//   {
-//     year: "Out/2018",
-//     value: 333
-//   },
-//   {
-//     year: "Nov/2018",
-//     value: 194
-//   },
-//   {
-//     year: "Dez/2018",
-//     value: 297
-//   },
-//   {
-//     year: "Jan/2019",
-//     value: 114
-//   },
-//   {
-//     year: "Fev/2019",
-//     value: 348
-//   },
-//   {
-//     year: "Mar/2019",
-//     value: 445
-//   },
-//   {
-//     year: "Abr/2019",
-//     value: 108
-//   },
-//   {
-//     year: "Mai/2019",
-//     value: 470
-//   }
-// ];
-
 const cols = {
-  value: {
+  '0': {
     min: 0
   },
-  year: {
+  '1': {
     range: [0, 1]
   }
 };
@@ -62,22 +27,20 @@ export const GraficoBarra2 =
     
     render() {
       const { mediaBens } = this.state;
-      // const { data: graficosBarra } = this.props.graficosBarra;
-      // console.log(graficosBarra);
-      
+
       return(
         <Chart height={400} data={mediaBens} scale={cols} forceFit>
           <Axis name="0" />
-          <Axis name="2" />
+          <Axis name="1" />
           <Tooltip
             crosshairs={{
               type: "y"
             }}
           />
-          <Geom type="line" position="0*2" size={2} />
+          <Geom type="line" position="0*1" size={2} />
           <Geom
             type="point"
-            position="0*2"
+            position="0*1"
             size={4}
             shape={"circle"}
             style={{
@@ -97,20 +60,19 @@ export const GraficoBarra2 =
 
     getMediaBensEmUso  = async () => {
       const response = await index.post('_xpack/sql?format=json', {
-        "query": "SELECT cast(MONTH_OF_YEAR(Data_Tombamento) as string) as mes, cast(year(Data_Tombamento) as string) as ano, sum(Valor_Bem) as total FROM sipes WHERE Filial = 'FLA' AND Tipo_Classe = 'T' AND Estado = 'Em Uso' and ano = '2013' group by ano, mes" 
+        "query": "SELECT Mes, Ano, sum(Valor_Bem) as total FROM data where Ano = '2016' group by Ano, Mes" 
       });
 
-      console.log(response.data.rows);
-
-      // const mesAno = response.data.rows.map(e => {
-      //   // const result = e[0].concat('/').concat(e[1]);
-      //   const newdata = [];
-      //   newdata.push(e[0].concat('/').concat(e[1]));
-      //   const order = newdata.sort();
-      //   console.log(order);
-      // })
-
+      response.data.rows.map(e => {
+        const mesAno = e[0].concat('/').concat(e[1]);
+        e[0] = mesAno;
+        e[1] = e[2];
+        e.pop();
+        return response.data.rows;
+      });
+      
       this.setState({ mediaBens: response.data.rows });
+
     }
 
   } // class
