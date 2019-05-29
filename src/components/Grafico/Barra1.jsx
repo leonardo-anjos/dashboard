@@ -50,7 +50,7 @@ export const GraficoBarra1 =
 
     getSomaTotalBensEmUso = async () => {
       const response = await index.post('_xpack/sql?format=json', {
-        "query": "SELECT Superintendencia, SUM(Valor_Bem) AS Total FROM sipes WHERE Filial = 'FLA' AND Tipo_Classe = 'T' AND Estado = 'Em Uso' GROUP BY Superintendencia" 
+        "query": "SELECT Superintendencia, SUM(Valor_Bem) AS Total FROM data WHERE Filial = 'FLA' AND Tipo_Classe = 'T' AND Estado = 'Em Uso' GROUP BY Superintendencia" 
       });
       // console.log(response.data.rows);
       this.setState({ somaTotalBens: response.data.rows });

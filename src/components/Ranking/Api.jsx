@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// import { connect } from 'react-redux';
+import { index } from '../../services/api/index';
+// import { reducer data } from './Redux'; 
 import { Row, Col, Select, Input } from 'antd';
 import {Chart} from 'react-google-charts';
 
@@ -40,44 +43,75 @@ const dataSource = [
   ['Zaire', 'Africa', 8, 10]
 ]
 
-export class RankingApi extends Component {
-  render() {
-    return(
-      <React.Fragment>
-        <Row gutter={16}>
-          <h1 style={{ backgroundColor: "#0C1A2D", color: "#ffff", fontWeight: "bold" }}>Ranking por API</h1>
-          <Col span={12}>
-            <Select defaultValue="select1" style={{ width: "100%" }} onChange={this.handleChange}>
-              <Option value="select1">SERPRO</Option>
-              <Option value="select2">Correios</Option>
-              <Option value="select4">CAIXA</Option>
-              <Option value="select5">SENASP</Option>
-              <Option value="select6">Uber</Option>
-            </Select>
-          </Col>
-          <Col span={12}>
-            <Input placeholder="Quantidade"/>
-          </Col>
-        </Row>
+export const RankingApi =
 
-        <Chart
-          style={{ margin: "20px auto 0", padding: "0 20px" }}
-          height={'300px'}
-          chartType="TreeMap"
-          loader={<div>Loading Chart</div>}
-          data={dataSource}
-          options={{
-            minColor: '#f00',
-            midColor: '#ddd',
-            maxColor: '#0d0',
-            headerHeight: 15,
-            fontColor: 'black',
-            showScale: true,
-          }}
-          rootProps={{ 'data-testid': '1' }}
-        />
+// connect(
+//   ({ redux }) => ({ redux }),
+//   { reducer }
+// )(
 
-      </React.Fragment>
-    );
-  }
-}
+  class extends Component {
+
+    state = {
+      result: []
+    }
+
+    render() {
+      const { result } = this.state;
+      console.log(result);
+
+      return(
+        <React.Fragment>
+          <Row gutter={16}>
+            <h1 style={{ backgroundColor: "#0C1A2D", color: "#ffff", fontWeight: "bold" }}>Ranking por API</h1>
+            <Col span={12}>
+              <Select defaultValue="select1" style={{ width: "100%" }} onChange={this.handleChange}>
+                <Option value="select1">SERPRO</Option>
+                <Option value="select2">Correios</Option>
+                <Option value="select4">CAIXA</Option>
+                <Option value="select5">SENASP</Option>
+                <Option value="select6">Uber</Option>
+              </Select>
+            </Col>
+            <Col span={12}>
+              <Input placeholder="Quantidade"/>
+            </Col>
+          </Row>
+
+          <Chart
+            style={{ margin: "20px auto 0", padding: "0 20px" }}
+            height={'300px'}
+            chartType="TreeMap"
+            loader={<div>Loading Chart</div>}
+            data={dataSource}
+            options={{
+              minColor: '#f00',
+              midColor: '#ddd',
+              maxColor: '#0d0',
+              headerHeight: 15,
+              fontColor: 'black',
+              showScale: true,
+            }}
+            rootProps={{ 'data-testid': '1' }}
+          />
+
+        </React.Fragment>
+      );
+    }
+
+    componentDidMount() {
+      // this.props.reducer();
+      this.getData(); 
+    }
+
+    getData = async () => {
+      const response = await index.post('_xpack/sql?format=json', {
+        "query": "select Estado as estado, sum(Numero_Patrimonial) as total from data where Filial = 'FLA' group by estado order by total desc" 
+      });
+
+      this.setState({ result: response.data.rows });
+    }
+  
+  } // class
+
+// ); // redux 
