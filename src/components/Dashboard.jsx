@@ -11,7 +11,7 @@ import { GraficoBarra2 } from './Grafico/Barra2';
 import { FilterSelect } from './Filter/Select';
 import './Dashboard.css';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 export class Dashboard extends Component {
   render() {
@@ -29,9 +29,12 @@ export class Dashboard extends Component {
           </div>
         </Sider>
         <Layout style={{ marginLeft: 200 }}>
-          <Header style={{ background: '#fff'}}>
-            <FilterSelect/>
-          </Header>
+          <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+            <div style={{ padding: 24, background: '#fff' }}>
+              <p><b>Filtros Gerais:</b></p>
+              <FilterSelect/>
+            </div>
+          </Content>
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
             <div style={{ padding: 24, background: '#fff', textAlign: 'center' }}>
               <Row gutter={24}> 
