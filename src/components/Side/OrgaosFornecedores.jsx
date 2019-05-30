@@ -5,8 +5,10 @@ export class SideOrgaosFornecedores extends Component {
   render() {
     return(
       <Card style={{ marginTop: 10 }}>
-        <p style={{ textAlign: 'center', fontWeight: 'bold'}}>Órgãos Fornecedores de Dados</p>
-        <Icon type="login" style={{ fontSize: '30px', color: '#08c'}} theme="outlined"/>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{ fontWeight: 'bold'}}>Órgãos Fornecedores de Dados</p>
+          <Icon type="login" style={{ fontSize: '30px', color: '#08c'}} theme="outlined"/>
+        </div>
       </Card>
     );
   }
