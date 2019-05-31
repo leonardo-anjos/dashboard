@@ -22,7 +22,6 @@ export const RankingOrgaos =
 
     render() {
       const { somaEstadoBem } = this.state;
-      console.log(somaEstadoBem);
 
       return(
         <React.Fragment>

@@ -22,8 +22,7 @@ export const RankingApi =
 
     render() {
       const { result } = this.state;
-      console.log(result);
-
+      
       return(
         <React.Fragment>
           <Row gutter={16}>
