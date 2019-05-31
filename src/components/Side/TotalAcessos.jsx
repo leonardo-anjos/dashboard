@@ -1,15 +1,37 @@
 import React, { Component } from 'react';
 import { Card, Icon } from 'antd';
+import { index } from '../../services/api/index';
 
 export class SideTotalAcessos extends Component {
+
+  state = {
+    result: 0
+  }
+
   render() {
+    const { result } = this.state;
+  
     return(
       <Card style={{ marginTop: 10 }}>
         <div style={{ textAlign: 'center' }}>
-          <p style={{ fontWeight: 'bold'}}>Total de Acessos</p>
+          <p style={{ fontWeight: 'bold', fontSize: '50px', marginBottom: '0px' }}>{result}</p>
+          <p style={{ fontSize: '12px' }}>Total de Acessos</p>
           <Icon type="interation" style={{ fontSize: '30px', color: '#08c'}} theme="outlined"/>
         </div>
       </Card>
     );
   }
+
+  componentDidMount() {
+    this.getTotalAcessos(); 
+  }
+
+  getTotalAcessos = async () => {
+    const response = await index.post('_xpack/sql?format=json', {
+      "query": "select sum(Orgao) from data"  
+    });
+
+    this.setState({ result: response.data.rows[0] });
+  }
+
 }
