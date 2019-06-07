@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Layout, Row, Col } from 'antd';
-import { SideTotalAcessos } from './Side/TotalAcessos';
-import { SideOrgaosConsumidores } from './Side/OrgaosConsumidores';
-import { SideOrgaosFornecedores } from './Side/OrgaosFornecedores';
-import { SideTotalUsoApis } from './Side/TotalUsoApis';
-import { RankingOrgaos } from './Ranking/Orgaos';
-import { RankingApi } from './Ranking/Api';
+import { FilterSelect } from './Filter/Select';
+import { DetailsTotalAcessosCard } from './Details/TotalAcessos/Card';
+import { DetailsOrgaosConsumidoresCard } from './Details/OrgaosConsumidores/Card';
+import { DetailsOrgaosFornecedoresCard } from './Details/OrgaosFornecedores/Card';
+import { DetailsApisUtilizadasCard } from './Details/ApisUtilizadas/Card';
+import { RankingOrgaoGrafico } from './Ranking/Orgao/Grafico';
+import { RankingApiGrafico } from './Ranking/Api/Grafico';
 import { GraficoBarra1 } from './Grafico/Barra1';
 import { GraficoBarra2 } from './Grafico/Barra2';
-import { FilterSelect } from './Filter/Select';
 import './Dashboard.css';
 
 const { Content, Footer, Sider } = Layout;
@@ -22,10 +22,10 @@ export class Dashboard extends Component {
             <p>CONECTA <b style={{ color: '#409EEC'}}>GOV</b></p>
           </div>
           <div className="details_side">
-            <SideTotalAcessos />
-            <SideOrgaosConsumidores />
-            <SideOrgaosFornecedores />
-            <SideTotalUsoApis />
+            <DetailsTotalAcessosCard />
+            <DetailsOrgaosConsumidoresCard />
+            <DetailsOrgaosFornecedoresCard />
+            <DetailsApisUtilizadasCard />
           </div>
         </Sider>
         <Layout style={{ marginLeft: 200 }}>
@@ -39,10 +39,10 @@ export class Dashboard extends Component {
             <div style={{ padding: 24, background: '#fff', textAlign: 'center' }}>
               <Row gutter={24}> 
                 <Col span={12}>
-                  <RankingOrgaos/>
+                  <RankingOrgaoGrafico />
                 </Col>
                 <Col span={12}>
-                  <RankingApi/>
+                  <RankingApiGrafico />
                 </Col>
               </Row>
             </div>

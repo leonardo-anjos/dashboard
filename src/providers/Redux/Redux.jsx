@@ -3,13 +3,11 @@ import { Provider } from 'react-redux';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
-import { graficosBarraReducer, graficosBarraWatcher  } from "../../components/Grafico/Redux";
-import { superintendenciasFlaReducer, superintendenciasFlaWatcher } from "../../components/Ranking/Redux";
+import { totalAcessosReducer, totalAcessosWatcher } from '../../components/Details/TotalAcessos/Redux';
 
 // reducers
 const reducers = combineReducers({
-  graficosBarra: graficosBarraReducer,
-  superintendenciasFla: superintendenciasFlaReducer
+  totalAcessos: totalAcessosReducer
 });
 
 // create the saga middleware
@@ -23,8 +21,7 @@ export const store = createStore(
 
 // run the saga
 // sagaMiddleware.run(loginWatcher);
-sagaMiddleware.run(graficosBarraWatcher);
-sagaMiddleware.run(superintendenciasFlaWatcher);
+sagaMiddleware.run(totalAcessosWatcher);
 
 // creating provider
 const ProviderRedux = ({ children }) =>
