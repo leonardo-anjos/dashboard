@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Select, Form, Row, Col, Button } from 'antd';
+import { YearSelect } from '../UI/YearSelect';
+import { CalendarMonthsSelect } from '../UI/CalendarMonthsSelect';
+import { OrgaosConsumidoresSelect } from '../Orgaos/Consumidores/Select';
+
 import './Select.css';
 
 const Option = Select.Option;
@@ -22,23 +26,10 @@ export class FilterSelect extends Component {
       // className="filter"
       <Form layout="inline" onSubmit={this.handleSearch}>
         <Form.Item label="Ano">
-          <Select style={{width: '100px'}} size={size} placeholder="Ano">{ano}</Select>
+          <YearSelect />
         </Form.Item>
         <Form.Item label="Mês">
-          <Select style={{width: '150px'}} placeholder="Mês">
-            <Option value="jan">Janeiro</Option>
-            <Option value="fev">Fevereiro</Option>
-            <Option value="mar">Março</Option>
-            <Option value="abr">Abril</Option>
-            <Option value="mai">Maio</Option>
-            <Option value="jun">Junho</Option>
-            <Option value="jul">Julho</Option>
-            <Option value="ago">Agosto</Option>
-            <Option value="set">Setembro</Option>
-            <Option value="out">Outubro</Option>
-            <Option value="nov">Novembro</Option>
-            <Option value="dez">Dezembro</Option>
-          </Select>
+          <CalendarMonthsSelect />
         </Form.Item>
         <Form.Item label="Período">
           <Select style={{width: '100px'}} size={size} placeholder="Período">{ano}</Select>
@@ -55,15 +46,7 @@ export class FilterSelect extends Component {
           </Select>
         </Form.Item>
         <Form.Item label="Órgão Consumidor">
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder="Órgão Consumidor"
-            optionFilterProp="children">
-            <Option value="serpro">SERPRO</Option>
-            <Option value="correios">Correios</Option>
-            <Option value="caixa">Caixa</Option>
-          </Select>
+          <OrgaosConsumidoresSelect />
         </Form.Item>
         <Form.Item label="Órgão Fornecedor">
           <Select
