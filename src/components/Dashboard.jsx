@@ -21,7 +21,7 @@ export class Dashboard extends Component {
           <div id="logo">
             <p>CONECTA <b style={{ color: '#409EEC'}}>GOV</b></p>
           </div>
-          <div className="details_side">
+          <div id="details_side">
             <DetailsTotalAcessosCard />
             <DetailsOrgaosConsumidoresCard />
             <DetailsOrgaosFornecedoresCard />
