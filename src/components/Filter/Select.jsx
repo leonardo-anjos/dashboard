@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import { Select, Form, Row, Col, Button } from 'antd';
-import { YearSelect } from '../UI/YearSelect';
-import { CalendarMonthsSelect } from '../UI/CalendarMonthsSelect';
+import { Form, Row, Col, Button, DatePicker } from 'antd';
 import { OrgaosConsumidoresSelect } from '../Orgaos/Consumidores/Select';
-
+import { OrgaosFornecedoresSelect } from '../Orgaos/Fornecedores/Select';
+import { ApiSelect } from '../Ranking/Api/Select';
+import { CalendarMonthsSelect } from '../UI/CalendarMonthsSelect';
+import { YearSelect } from '../UI/YearSelect';
 import './Select.css';
 
-const Option = Select.Option;
-
-const ano = [];
-for (let i = 1990; i <= 2019; i++) {
-  ano.push(<Option key={i}>{i}</Option>);
-}
+const { RangePicker } = DatePicker;
 
 export class FilterSelect extends Component {
   
@@ -20,10 +16,8 @@ export class FilterSelect extends Component {
   }
 
   render() {
-    const { size } = this.state;
     
     return(
-      // className="filter"
       <Form layout="inline" onSubmit={this.handleSearch}>
         <Form.Item label="Ano">
           <YearSelect />
@@ -31,33 +25,21 @@ export class FilterSelect extends Component {
         <Form.Item label="Mês">
           <CalendarMonthsSelect />
         </Form.Item>
-        <Form.Item label="Período">
+        {/* <Form.Item label="Período">
           <Select style={{width: '100px'}} size={size} placeholder="Período">{ano}</Select>
+        </Form.Item> */}
+        <Form.Item label="Período">
+          {/* {getFieldDecorator('range-picker', rangeConfig)(<RangePicker />)} */}
+          <RangePicker format="DD-MM-YYYY"/>
         </Form.Item>
         <Form.Item label="API">
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder="API"
-            optionFilterProp="children">
-            <Option value="cpf">Consulta CPF</Option>
-            <Option value="manifestacao">Consulta Manisfestação</Option>
-            <Option value="siape">Consulta SIAPE</Option>
-          </Select>
+          <ApiSelect/>
         </Form.Item>
         <Form.Item label="Órgão Consumidor">
           <OrgaosConsumidoresSelect />
         </Form.Item>
         <Form.Item label="Órgão Fornecedor">
-          <Select
-            showSearch
-            style={{ width: 250 }}
-            placeholder="Órgão Fornecedor"
-            optionFilterProp="children">
-            <Option value="rf">Receita Federal</Option>
-            <Option value="ogu">Ouvidoria Geral da União</Option>
-            <Option value="mp">Ministério do Planejamento</Option>
-          </Select>
+          <OrgaosFornecedoresSelect />
         </Form.Item>
         <Row>
           <Col span={24} style={{ textAlign: 'right' }}>
@@ -72,7 +54,7 @@ export class FilterSelect extends Component {
 
   handleSearch = e => {
     // console.log('handleSubmit');
-    alert('resultado da busca')
+    console.log(e)
   };
 
 }

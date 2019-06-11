@@ -28,7 +28,7 @@ export const RankingApiGrafico =
           <Row gutter={16}>
             <h1 style={{ backgroundColor: "#0C1A2D", color: "#ffff", fontWeight: "bold" }}>Ranking por API</h1>
             <Col span={12}>
-              <Select defaultValue="select1" style={{ width: "100%" }} onChange={this.handleChange}>
+              <Select placeholder="Selecione uma API" style={{ width: "100%" }} onChange={this.handleChange}>
                 <Option value="select1">SERPRO</Option>
                 <Option value="select2">Correios</Option>
                 <Option value="select4">CAIXA</Option>
@@ -61,7 +61,7 @@ export const RankingApiGrafico =
 
     getData = async () => {
       const response = await index.post('_xpack/sql?format=json', {
-        "query": "select Orgao as org, Superintendencia sup, count(Numero_Patrimonial) as cnt from data where Filial = 'FLA' and sup = 'SUPOP' group by sup, org" 
+        "query": "select Orgao as org, Superintendencia sup, count(Numero_Patrimonial) as cnt from data where Filial = 'SPO' and sup = 'SUPOP' group by sup, org" 
       });
 
       response.data.rows[0] = ["orgao", "superintendencia", "total"];

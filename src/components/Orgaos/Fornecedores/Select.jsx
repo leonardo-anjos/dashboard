@@ -15,29 +15,24 @@ export const OrgaosFornecedoresSelect =
   class extends Component {
 
     state = {
-      result: 0
+      orgaos: []
     }
 
     render() {
-      const { result } = this.state;
+      const { orgaos } = this.state;
 
       return(
         <Select
+          style={{ width: 250 }}
           showSearch
-          style={{ width: 200 }}
-          placeholder="Select a person"
-          optionFilterProp="children"
-          onChange={this.onChange}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-          onSearch={this.onSearch}
-          filterOption={
-            (input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
-        >
-          <Option value="jack">Jack</Option>
-          <Option value="lucy">Lucy</Option>
-          <Option value="tom">Tom</Option>
+          filterOption
+          placeholder="Selecione um órgão fornecedor"
+          notFoundContent="Órgão não encontrado">
+          { orgaos.map(o => 
+            <Option key={o}>
+              {o[0]}
+            </Option> 
+          )}
         </Select>
       );
     }
@@ -48,26 +43,10 @@ export const OrgaosFornecedoresSelect =
 
     getOrgaosFornecedores = async () => {
       const response = await index.post('_xpack/sql?format=json', {
-        "query": "select Superintendencia from data group by Superintendencia"
+        "query": "select Superintendencia from data where Filial = 'FLA' group by Superintendencia"
       });
 
-      this.setState({ result: response.data.rows[0] });
-    }
-
-    onChange(value) {
-      console.log(`selected ${value}`);
-    }
-    
-    onBlur() {
-      console.log('blur');
-    }
-    
-    onFocus() {
-      console.log('focus');
-    }
-    
-    onSearch(val) {
-      console.log('search:', val);
+      this.setState({ orgaos: response.data.rows });
     }
 
   }

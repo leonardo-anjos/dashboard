@@ -20,23 +20,19 @@ export const OrgaosConsumidoresSelect =
 
     render() {
       const { orgaos } = this.state;
-      // console.log(orgaos)
-
+   
       return(
         <Select
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           showSearch
           filterOption
-          placeholder="Selecione uma API"
-          notFoundContent="API não encontrada"
-          // { orgaos.map(o =>
-          //     <Option 
-          //       key={}
-          //       value="jack">
-          //       {o.nome}
-          //     </Option>
-          // )}
-        >
+          placeholder="Selecione um órgão consumidor"
+          notFoundContent="Órgão não encontrado">
+          { orgaos.map(o => 
+            <Option key={o}>
+              {o[0]}
+            </Option> 
+          )}
         </Select>
       );
     }
@@ -49,11 +45,6 @@ export const OrgaosConsumidoresSelect =
       const response = await index.post('_xpack/sql?format=json', {
         "query": "select Orgao from data where Filial = 'FLA' group by Orgao"
       });
-
-      response.data.rows.map(e => {
-        console.log(e[0])
-      })
-
       this.setState({ orgaos: response.data.rows });
     }
 
