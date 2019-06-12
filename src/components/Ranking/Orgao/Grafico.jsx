@@ -27,8 +27,8 @@ export const RankingOrgaoGrafico =
             <h1 style={{ backgroundColor: "#0C1A2D", color: "#ffff", fontWeight:"bold" }}>Ranking por Órgão</h1>
             <Col span={12}>
               <Select style={{ width: "100%" }} onChange={this.handleChange} placeholder="Ordenar por">
-                <Option value="maior">Maior</Option>
-                <Option value="menor">Menor</Option>
+                <Option value="desc">Maior</Option>
+                <Option value="asc">Menor</Option>
               </Select>
             </Col>
             <Col span={12}>
@@ -87,7 +87,7 @@ export const RankingOrgaoGrafico =
 
     getSomaEstadoBem = async () => {
       const response = await index.post('_xpack/sql?format=json', {
-        "query": "select Estado as estado, sum(Numero_Patrimonial) as total from sipes where Filial = 'FLA' group by estado order by total desc" 
+        "query": "select Estado as estado, sum(Numero_Patrimonial) as total from data group by estado" 
       });
 
       response.data.rows[0] = ["estado", "valor"];
