@@ -15,27 +15,24 @@ export const ApiSelect =
   class extends Component {
 
     state = {
-      result: 0
+      apis: []
     }
 
     render() {
-      const { result } = this.state;
+      const { apis } = this.state;
 
       return(
         <Select
-          style={{ width: 200 }}
+          style={{ width: 150 }}
           showSearch
           filterOption
           placeholder="Selecione a API"
-          notFoundContent="API não encontrada"
-          // { orgaos.map(o =>
-          //     <Option 
-          //       key={}
-          //       value="jack">
-          //       {o.nome}
-          //     </Option>
-          // )}
-        >
+          notFoundContent="API não encontrada">
+          { apis.map(a =>
+              <Option key={a}>
+                {a[0]}
+              </Option>
+          )}
         </Select>
       );
     }
@@ -46,26 +43,10 @@ export const ApiSelect =
 
     getApi = async () => {
       const response = await index.post('_xpack/sql?format=json', {        
-        "query": "select Superintendencia from data group by Superintendencia"
+        "query": "select Filial from data group by Filial"
       });
 
-      this.setState({ result: response.data.rows[0] });
-    }
-
-    onChange(value) {
-      console.log(`selected ${value}`);
-    }
-    
-    onBlur() {
-      console.log('blur');
-    }
-    
-    onFocus() {
-      console.log('focus');
-    }
-    
-    onSearch(val) {
-      console.log('search:', val);
+      this.setState({ apis: response.data.rows });
     }
 
   }
