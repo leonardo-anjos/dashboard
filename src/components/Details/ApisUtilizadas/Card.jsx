@@ -36,7 +36,7 @@ export const DetailsApisUtilizadasCard =
   
     getQtdUsoApis = async () => {
       const response = await index.post('_xpack/sql?format=json', {
-        "query": "select count(distinct Superintendencia) from data where Filial = 'FLA'" 
+        "query": "select count(distinct Filial) from data" 
       });
   
       this.setState({ result: response.data.rows[0] });
